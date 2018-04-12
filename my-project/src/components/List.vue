@@ -1,11 +1,15 @@
 <template>
   <div class="list">
       <div class="top">
-        <div class="image"></div>
-        <div class="filter"></div>
+        <div class="image">
+          <img :src="main.img" alt="">
+        </div>
+        <div class="filter">
+          <img :src="main.img" alt="">
+        </div>
         <div class="des">
-            <h2>美姿</h2>
-            <p>仪态、站立及走路的姿势</p>
+            <h2>{{main.word}}</h2>
+            <p>{{main.text}}</p>
         </div>
       </div>
       <div class="other">
@@ -23,25 +27,7 @@
             </div>
           </router-link>
         </div>
-
-        <!-- <div class="unit">
-          <div class="left">
-            <img src="../assets/img/L1.png" alt="">
-          </div>
-          <div class="right">
-            <div class="f14">你的饮食习惯正确吗?10个容易忽视的餐桌健康小问题</div>
-            <p class="mt55">1028/01/30</p>
-            <p>主讲人: 东 优妃</p>
-          </div>
-        </div> -->
-
-
       </div>
-    <!-- <router-link to="/play">
-      <div class="toPlay">
-        {{$route.params.id}}
-      </div>
-    </router-link> -->
   </div>
 </template>
 
@@ -52,21 +38,29 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      itemList : []
+      itemList : [],
+      main:{
+        img:"",
+        text:"",
+        word:""
+      },
     }
   },
   created() {
     console.log('1');
   },
   mounted:function () {
-    axios.get("http://localhost:8080/static/test.json")
-      .then(response => {
-        console.log(response)
-      this.itemList = response.data.item
-        console.log(this.itemList)
-      });
-
-    }
+    axios.get("http://localhost:8080/static/test.json",{
+      params: {
+        id: 1,
+      }
+    }).then(response => {
+        // console.log(response)
+        this.itemList = response.data.item;
+        this.main = response.data.main;
+        // console.log(this.itemList)
+    });
+  }
 }
 </script>
 
@@ -81,8 +75,12 @@ export default {
       .image{
         width:100%;
         height:100%;
-        background: url(../assets/img/L1.png) no-repeat 0 0 ;
-        background-size: 100% 100%;
+        img{
+          width:100%;
+          height:100%;
+        }
+        // background: url(../assets/img/L1.png) no-repeat 0 0 ;
+        // background-size: 100% 100%;
 
       }
       .filter{
@@ -90,9 +88,13 @@ export default {
         top: 0;
         width:100%;
         height:99%;
-        background: url(../assets/img/L1.png) no-repeat 0 0 ;
-        background-size: 100% 99%;
+        // background: url(../assets/img/L1.png) no-repeat 0 0 ;
+        // background-size: 100% 99%;
         filter:blur(2px);
+        img{
+          width:100%;
+          height:100%;
+        }
       }
       .des{
         background: rgba(0, 0, 0, 0.2);
