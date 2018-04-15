@@ -57,5 +57,32 @@
   ],
   "play":{
     "playcon":"这里是播放页"
-  }
+  },
+  "playItem": [
+    {
+      "id": 1,
+      "img":"../src/assets/img/L1.png",
+      "name": "你的饮食习惯正确吗?10个容易忽视的餐桌健康小问题",
+      "time": "1028/01/01",
+      "person": "主讲人: 东1 优妃"
+    },{
+      "id": 2,
+      "img":"../src/assets/img/L2.png",
+      "name": "这里是第2个",
+      "time": "1028/01/01",
+      "person": "主讲人: 东2 优妃"
+    },{
+      "id": 3,
+      "img":"../src/assets/img/L3.png",
+      "name": "这里是第3个",
+      "time": "1028/01/03",
+      "person": "主讲人: 东3 优妃"
+    },{
+      "id": 4,
+      "img":"../src/assets/img/L4.png",
+      "name": "这里是第4个",
+      "time": "1028/01/04",
+      "person": "主讲人: 东4 优妃"
+    }
+  ]
 }
