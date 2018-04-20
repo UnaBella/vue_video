@@ -2,10 +2,10 @@
   <div class="list">
       <div class="top">
         <div class="image">
-          <img :src="this.$route.params.list_inner_img" alt="">
+          <img :src="main.img" alt="">
         </div>
         <div class="filter">
-          <img :src="this.$route.params.list_inner_img" alt="">
+          <img :src="main.img" alt="">
         </div>
         <div class="des">
             <h2>{{main.word}}</h2>
@@ -35,6 +35,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      ids:'',
       itemList : [],
       main:{
         img:"",
@@ -44,11 +45,19 @@ export default {
     }
   },
   created() {
-
+this.ids = this.$route.params.ids
+this.main.img = this.$route.params.list_inner_img
+this.main.word = this.$route.params.list_text_p
+this.main.text = this.$route.params.list_text_s
+// console.log(`this.ids`);
+// console.log(this.ids);
   },
 
     mounted:function () {
-      axios.get(`http://yuki.llwell.net/api/vlist/item/${this.$route.params.ids}/false`).then(response => {
+      // console.log('listmounted');
+      // console.log(this.ids);
+      axios.get(`http://yuki.llwell.net/api/vlist/item/${this.ids}/false`).then(response => {
+        console.log(response);
           response.data.forEach((item)=>{
             this.itemList.push(item);
           })

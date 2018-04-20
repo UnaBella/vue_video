@@ -19,7 +19,8 @@
       </div>
       <div class="list" >
 
-        <div class="unit" v-for="(item,index) in unitList" @click="listClick(item.ids,item.list_inner_img)">
+        <div class="unit" v-for="(item,index) in unitList" 
+        @click="listClick(item.ids,item.list_inner_img,item.list_text_p,item.list_text_s)">
           <div class="top">
             <img :src="item.list_img" alt="">
           </div>
@@ -44,18 +45,21 @@ import axios from 'axios'
         },
         mounted:function () {
           axios.get("http://yuki.llwell.net/api/vlist/entry/1/false").then(response => {
+            console.log(`responsehome`);console.log(response);
               response.data.forEach((item)=>{
                 this.unitList.push(item);
               })
           });
         },
         methods: {
-          listClick(ids,list_inner_img){
+          listClick(ids,list_inner_img,list_text_p,list_text_s){
               this.$router.push({
                 name: 'list',
                 params: {
                   ids:ids,
                   list_inner_img:list_inner_img,
+                  list_text_p:list_text_p,
+                  list_text_s:list_text_s,
                 }
               })
           }
