@@ -2,14 +2,14 @@
   <div class="list">
       <div class="top">
         <div class="image">
-          <img :src="main.img" alt="">
+          <img :src="this.$route.query.list_inner_img" alt="">
         </div>
         <div class="filter">
-          <img :src="main.img" alt="">
+          <img :src="this.$route.query.list_inner_img" alt="">
         </div>
         <div class="des">
-            <h2>{{main.word}}</h2>
-            <p>{{main.text}}</p>
+            <h2>{{this.$route.query.list_text_p}}</h2>
+            <p>{{this.$route.query.list_text_s}}</p>
         </div>
       </div>
       <div class="other">
@@ -35,7 +35,6 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      ids:'',
       itemList : [],
       main:{
         img:"",
@@ -45,19 +44,9 @@ export default {
     }
   },
   created() {
-this.ids = this.$route.params.ids
-this.main.img = this.$route.params.list_inner_img
-this.main.word = this.$route.params.list_text_p
-this.main.text = this.$route.params.list_text_s
-// console.log(`this.ids`);
-// console.log(this.ids);
   },
-
     mounted:function () {
-      // console.log('listmounted');
-      // console.log(this.ids);
-      axios.get(`http://yuki.llwell.net/api/vlist/item/${this.ids}/false`).then(response => {
-        console.log(response);
+      axios.get(`http://yuki.llwell.net/api/vlist/item/${this.$route.query.ids}/false`).then(response => {
           response.data.forEach((item)=>{
             this.itemList.push(item);
           })
@@ -83,7 +72,6 @@ this.main.text = this.$route.params.list_text_s
         }
         // background: url(../assets/img/L1.png) no-repeat 0 0 ;
         // background-size: 100% 100%;
-
       }
       .filter{
         position: absolute;
@@ -126,7 +114,6 @@ this.main.text = this.$route.params.list_text_s
           float: left;
           width:90px;
           height:140px;
-
           // border: 1px solid red;
           img{
             width:100%;
@@ -145,8 +132,6 @@ this.main.text = this.$route.params.list_text_s
           }
         }
       }
-
-
     }
   }
 </style>

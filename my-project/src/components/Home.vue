@@ -1,5 +1,5 @@
 <template>
-    
+
 
      <!--  <router-link to="/list/1">Go to list1</router-link><br>
       <router-link to="/list/2">Go to list2</router-link><br> -->
@@ -19,8 +19,8 @@
       </div>
       <div class="list" >
 
-        <div class="unit" v-for="(item,index) in unitList" 
-        @click="listClick(item.ids,item.list_inner_img,item.list_text_p,item.list_text_s)">
+        <div class="unit" v-for="(item,index) in unitList" >
+          <router-link :to="{path:'/List',query: {ids:item.ids,list_inner_img:item.list_inner_img,list_text_s:item.list_text_s,list_text_p:item.list_text_p}}">
           <div class="top">
             <img :src="item.list_img" alt="">
           </div>
@@ -28,6 +28,7 @@
             <h3>{{item.list_text_p}}</h3>
             <div class="p">{{item.list_text_s}}</div>
           </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -45,21 +46,18 @@ import axios from 'axios'
         },
         mounted:function () {
           axios.get("http://yuki.llwell.net/api/vlist/entry/1/false").then(response => {
-            console.log(`responsehome`);console.log(response);
               response.data.forEach((item)=>{
                 this.unitList.push(item);
               })
           });
         },
         methods: {
-          listClick(ids,list_inner_img,list_text_p,list_text_s){
+          listClick(ids,list_inner_img){
               this.$router.push({
                 name: 'list',
                 params: {
                   ids:ids,
                   list_inner_img:list_inner_img,
-                  list_text_p:list_text_p,
-                  list_text_s:list_text_s,
                 }
               })
           }
@@ -85,7 +83,6 @@ import axios from 'axios'
           height:100%;
         }
       }
-      
     }
     .other{
       margin: 0 7px;
@@ -156,7 +153,6 @@ import axios from 'axios'
           .unit:nth-child(2n) {
             float: right;
           }
-
         }
       }
     }
